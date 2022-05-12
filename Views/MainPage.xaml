@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="Dictionary.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Dictionary.ViewModels"
+    mc:Ignorable="d"
+    xmlns:controls="using:Template10.Controls" xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:MainPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <controls:PageHeader Content="Dictionary" Grid.Row="0" Background="Transparent"/>
+        
+        <Grid Margin="50" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <ComboBox SelectedItem="{Binding FromSelected, Mode=TwoWay}" ItemsSource="{Binding From, Mode=OneTime}" PlaceholderText="From" HorizontalAlignment="Center" VerticalAlignment="Center" Windows10version1809:CornerRadius="4"/>
+            <Button Grid.Column="1" Command="{Binding TranslateCommand}" Content="Translate"  Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Windows10version1809:CornerRadius="4"/>
+            <ComboBox Grid.Column="2" SelectedItem="{Binding ToSelected, Mode=TwoWay}" ItemsSource="{Binding To}" PlaceholderText="To" HorizontalAlignment="Center" VerticalAlignment="Center" Windows10version1809:CornerRadius="4"/>
+
+            <TextBox Grid.Row="1" Text="{Binding TextFrom, Mode=TwoWay}" HorizontalAlignment="Stretch" TextWrapping="Wrap" Windows10version1809:CornerRadius="4"/>
+            <ListView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding TextTo}" HorizontalAlignment="Stretch" Windows10version1809:CornerRadius="4"/>
+
+            <ComboBox Grid.Row="2" SelectedItem="{Binding LanguageSelected, Mode=TwoWay}" ItemsSource="{Binding SynLanguages, Mode=OneTime}" PlaceholderText="Language" HorizontalAlignment="Center" VerticalAlignment="Center" Windows10version1809:CornerRadius="4"/>
+            
+            <Button Grid.Row="2" Grid.Column="1" Command="{Binding SynonymCommand}" Content="Get synonyms" VerticalAlignment="Center" HorizontalAlignment="Center" Windows10version1809:CornerRadius="4"/>
+
+            <TextBox Grid.Row="3" Text="{Binding SynTextFrom, Mode=TwoWay}" HorizontalAlignment="Stretch" TextWrapping="Wrap" Windows10version1809:CornerRadius="4"/>
+            <ListView Grid.Row="3" Grid.Column="2"  ItemsSource="{Binding SynTextTo}" HorizontalAlignment="Stretch" Windows10version1809:CornerRadius="4"/>
+
+        </Grid>
+    </Grid>
+    
+
+</Page>
